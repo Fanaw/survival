@@ -20,7 +20,8 @@ public class FenetreInventaire extends JPanel implements ActionListener   {
 	boolean show = false ; 
 	Jeu jeu ;
 	private BufferedImage fond;
-	boolean[][] curseur ={{true,false,false,false,false},{false,false,false,false,false},{false,false,false,false,false},{false,false,false,false,false}} ;
+	int xCurseur =  100 ;
+	int yCurseur = 300 ;
 	static Clavier clavier ;
 	
 	ArrayList<ImageInventaire> liste_ressources = new ArrayList<ImageInventaire>() ;
@@ -115,6 +116,31 @@ public class FenetreInventaire extends JPanel implements ActionListener   {
 			}
 		}
 		
+		int largeur = 100 ;
+		int hauteur = 100 ;
+		
+		buffer.setColor(Color.white);
+		buffer.drawRoundRect(xCurseur,yCurseur,largeur,hauteur,10,10);
+		buffer.drawRoundRect(xCurseur+1,yCurseur+1,largeur-2,hauteur-2,10,10);
+		buffer.drawRoundRect(xCurseur+2,yCurseur+2,largeur-4,hauteur-4,10,10);
+		buffer.drawRoundRect(xCurseur+3,yCurseur+3,largeur-6,hauteur-6,10,10);
+		
+		int[] xPoints = {xCurseur,xCurseur+20,xCurseur};
+		int[] yPoints = {yCurseur,yCurseur,yCurseur+20};
+		buffer.fillPolygon(xPoints,yPoints,3);
+		
+		int[] xPoints2 = {xCurseur+largeur,xCurseur+largeur-20,xCurseur+largeur};
+		int[] yPoints2 = {yCurseur,yCurseur,yCurseur+20};
+		buffer.fillPolygon(xPoints2,yPoints2,3);
+		
+		int[] xPoints3 = {xCurseur,xCurseur+20,xCurseur};
+		int[] yPoints3 = {yCurseur+hauteur,yCurseur+hauteur,yCurseur+hauteur-20};
+		buffer.fillPolygon(xPoints3,yPoints3,3);
+		
+		int[] xPoints4 = {xCurseur+largeur,xCurseur+largeur-20,xCurseur+largeur};
+		int[] yPoints4 = {yCurseur+hauteur,yCurseur+hauteur,yCurseur+hauteur-20};
+		buffer.fillPolygon(xPoints4,yPoints4,3);
+		
 		buffer.setColor(new Color(100,100,100,200));
 		buffer.fillRect(0,0,LARGEUR_FENETRE,HAUTEUR_FENETRE/5);
 		buffer.fillRect(0,4*HAUTEUR_FENETRE/5,LARGEUR_FENETRE,HAUTEUR_FENETRE/5);
@@ -137,129 +163,16 @@ public class FenetreInventaire extends JPanel implements ActionListener   {
 		
 		if(show){
 			
-			//on met en evidence l'item en selection
-			for(int i=0;i<4;i++){
-				for(int j=0;j<5;j++){
-					if(afficher_liste_ressources){
-						if(curseur[i][j]){
-							try{
-								liste_ressources.get(5*i+j).active=true;
-							}catch(IndexOutOfBoundsException f){}
-						}else if(!curseur[i][j]){
-							try{
-								liste_ressources.get(5*i+j).active=false;
-							}catch(IndexOutOfBoundsException f){}
-						}if(curseur[i][j] && clavier.up){
-							try{
-								curseur[i][j]=false;
-								curseur[i-1][j]=true;
-								clavier.up=false;
-							}catch(ArrayIndexOutOfBoundsException f){}	
-								
-						}if(curseur[i][j] && clavier.down){
-							try{
-								liste_ressources.get(5*(i+1)+j).active=false;
-								curseur[i][j]=false;	
-								curseur[i+1][j]=true;														
-								clavier.down=false;
-							}catch(IndexOutOfBoundsException f){
-							}
-							
-						}else if(curseur[i][j] && clavier.left){
-							try{
-								curseur[i][j]=false;
-								curseur[i][j-1]=true;
-								clavier.left=false;
-							}catch(ArrayIndexOutOfBoundsException f){
-								curseur[i][j]=false;
-								curseur[0][0]=true;
-								afficher_liste_ressources=false;
-								afficher_liste_objets=true;
-							}
-							
-						}else if(curseur[i][j] && clavier.right){
-							try{
-								liste_ressources.get(5*(i)+j+1).active=false;
-								curseur[i][j]=false;
-								curseur[i][j+1]=true;								
-								clavier.right=false;
-							}catch(IndexOutOfBoundsException f){
-								curseur[i][j]=false;
-								curseur[0][0]=true;
-								afficher_liste_ressources=false;
-								afficher_liste_objets=true;
-							}
-						}else if(curseur[i][j]){
-							try{
-								liste_ressources.get(5*i+j).active=true;
-							}catch(IndexOutOfBoundsException f){}
-						}else if(!curseur[i][j]){
-							try{
-								liste_ressources.get(5*i+j).active=false;
-							}catch(IndexOutOfBoundsException f){}
-						}	
-					 }
-					 else if(afficher_liste_objets){
-						if(curseur[i][j]){
-							try{
-								liste_objets.get(5*i+j).active=true;
-							}catch(IndexOutOfBoundsException f){}
-						}if(!curseur[i][j]){
-							try{
-								liste_objets.get(5*i+j).active=false;
-							}catch(IndexOutOfBoundsException f){}
-						}if(curseur[i][j] && clavier.up){
-							try{
-								curseur[i][j]=false;
-								curseur[i-1][j]=true;
-								clavier.up=false;
-							}catch(ArrayIndexOutOfBoundsException f){}	
-								
-						}if(curseur[i][j] && clavier.down){
-							try{
-								liste_objets.get(5*(i+1)+j).active=false;
-								curseur[i][j]=false;
-								curseur[i+1][j]=true;							
-								clavier.down=false;
-							}catch(IndexOutOfBoundsException f){
-							}
-							
-						}if(curseur[i][j] && clavier.left){
-							try{
-								curseur[i][j]=false;
-								curseur[i][j-1]=true;								
-								clavier.left=false;
-							}catch(ArrayIndexOutOfBoundsException f){
-								curseur[i][j]=false;
-								curseur[0][0]=true;
-								afficher_liste_objets=false;
-								afficher_liste_ressources=true;
-							}
-							
-						}if(curseur[i][j] && clavier.right){
-							try{
-								liste_objets.get(5*(i)+j+1).active=false;
-								curseur[i][j]=false;
-								curseur[i][j+1]=true;								
-								clavier.right=false;
-							}catch(IndexOutOfBoundsException f){
-								curseur[i][j]=false;
-								curseur[0][0]=true;
-								afficher_liste_objets=false;
-								afficher_liste_ressources=true;
-							}
-						}if(curseur[i][j]){
-							try{
-								liste_ressources.get(5*i+j).active=true;
-							}catch(IndexOutOfBoundsException f){}
-						}if(!curseur[i][j]){
-							try{
-								liste_ressources.get(5*i+j).active=false;
-							}catch(IndexOutOfBoundsException f){}
-						}	
-					}			
-				}
-			}
+			if(clavier.up) {
+				yCurseur-=120;
+			}if(clavier.down) {
+				yCurseur+=120;
+			}if(clavier.left) {
+				xCurseur-=120;
+			}if(clavier.right) {
+				xCurseur+=120;
+			}  
+				
 			
 				
 			
