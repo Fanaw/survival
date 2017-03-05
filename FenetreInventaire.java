@@ -22,10 +22,14 @@ public class FenetreInventaire extends JPanel implements ActionListener   {
 	private BufferedImage fond;
 	int xCurseur =  100 ;
 	int yCurseur = 300 ;
+	int compteurCurseurBefor = 0 ;
+	int compteurCurseur = 0 ; 
+	int compteurCurseurX = 0;
+	int compteurCurseurY = 0;
 	static Clavier clavier ;
 	
 	ArrayList<ImageInventaire> liste_ressources = new ArrayList<ImageInventaire>() ;
-	ArrayList<ImageInventaire> liste_objets = new ArrayList<ImageInventaire>() ;
+	ArrayList<ImageObjet> liste_objets = new ArrayList<ImageObjet>() ;
 	//ArrayList<ImageInventaire> liste_nourriture = new ArrayList<ImageInventaire>() ;
 	
 	boolean afficher_liste_ressources = false;
@@ -46,7 +50,7 @@ public class FenetreInventaire extends JPanel implements ActionListener   {
 			liste_ressources.add(new ImageInventaire(jeu.fenetre_JEU.j1.ressources_joueur.get(i),false));
 		}
 		for(int i=0;i<jeu.fenetre_JEU.j1.objets_joueur.size();i++){
-			liste_objets.add(new ImageInventaire(jeu.fenetre_JEU.j1.objets_joueur.get(i),false));
+			liste_objets.add(new ImageObjet(jeu.fenetre_JEU.j1.objets_joueur.get(i),false));
 		}
 		
 		//Chargement des images
@@ -162,21 +166,102 @@ public class FenetreInventaire extends JPanel implements ActionListener   {
 	public void actionPerformed(ActionEvent e) {
 		
 		if(show){
-			
-			if(clavier.up) {
-				yCurseur-=120;
-			}if(clavier.down) {
-				yCurseur+=120;
-			}if(clavier.left) {
-				xCurseur-=120;
-			}if(clavier.right) {
-				xCurseur+=120;
-			}  
+			if(afficher_liste_objets){
 				
-			
+				compteurCurseurBefor=compteurCurseur;
 				
+				if(clavier.up && compteurCurseurY>0 && compteurCurseur>0 && compteurCurseur<liste_objets.size()) {
+					yCurseur-=120;
+					compteurCurseur-=5;
+					compteurCurseurY-=1;
+				}else if(clavier.down && compteurCurseurY<3 && compteurCurseur>=0 && compteurCurseur<liste_objets.size()-5) {
+					yCurseur+=120;
+					compteurCurseur+=5;
+					compteurCurseurY+=1;
+				}else if(clavier.left && compteurCurseurX>0 && compteurCurseur>0 && compteurCurseur<liste_objets.size()) {
+					xCurseur-=120;
+					compteurCurseur-=1;
+					compteurCurseurX-=1;
+				}else if(clavier.right && compteurCurseurX<4 && compteurCurseur>=0 && compteurCurseur<liste_objets.size()-1) {
+					xCurseur+=120;
+					compteurCurseur+=1;
+					compteurCurseurX+=1;
+				}else if(clavier.left) {
+					xCurseur =  100 ;
+					yCurseur = 300 ;
+					compteurCurseur = 0 ; 
+					compteurCurseurX = 0;
+					compteurCurseurY = 0;
+					afficher_liste_objets = false ;
+					afficher_liste_ressources = true ;
+				}else if(clavier.right) {
+					xCurseur =  100 ;
+					yCurseur = 300 ;
+					compteurCurseur = 0 ; 
+					compteurCurseurX = 0;
+					compteurCurseurY = 0;
+					afficher_liste_objets = false ;
+					afficher_liste_ressources = true ;
+					
+				}
+				
+				liste_objets.get(compteurCurseur).active=true; 
+				    
+				if(compteurCurseur!=compteurCurseurBefor){
+					liste_objets.get(compteurCurseur).active=false; 
+				}
+			}
 			
-						
+			else if(afficher_liste_ressources){
+				
+				compteurCurseurBefor=compteurCurseur;
+				
+				if(clavier.up && compteurCurseurY>0 && compteurCurseur>0 && compteurCurseur<liste_ressources.size()) {
+					yCurseur-=120;
+					compteurCurseur-=5;
+					compteurCurseurY-=1;
+				}else if(clavier.down && compteurCurseurY<3 && compteurCurseur>=0 && compteurCurseur<liste_ressources.size()-5) {
+					yCurseur+=120;
+					compteurCurseur+=5;
+					compteurCurseurY+=1;
+				}else if(clavier.left && compteurCurseurX>0 && compteurCurseur>0 && compteurCurseur<liste_ressources.size()) {
+					xCurseur-=120;
+					compteurCurseur-=1;
+					compteurCurseurX-=1;
+				}else if(clavier.right && compteurCurseurX<4 && compteurCurseur>=0 && compteurCurseur<liste_ressources.size()-1) {
+					xCurseur+=120;
+					compteurCurseur+=1;
+					compteurCurseurX+=1;
+				}else if(clavier.left) {
+					xCurseur =  100 ;
+					yCurseur = 300 ;
+					compteurCurseur = 0 ; 
+					compteurCurseurX = 0;
+					compteurCurseurY = 0;
+					afficher_liste_objets = true ;
+					afficher_liste_ressources = false ;
+				}else if(clavier.right) {
+					xCurseur =  100 ;
+					yCurseur = 300 ;
+					compteurCurseur = 0 ; 
+					compteurCurseurX = 0;
+					compteurCurseurY = 0;
+					afficher_liste_objets = true ;
+					afficher_liste_ressources = false ;
+					
+				}   
+				
+				liste_ressources.get(compteurCurseur).active=true;
+				
+				if(compteurCurseur!=compteurCurseurBefor){
+					liste_ressources.get(compteurCurseurBefor).active=false;
+				}
+				
+			}
+			
+			
+			
+			
 			if(clavier.exit){
 				jeu.fenetre_JEU.show=true;
 				this.show=false;
