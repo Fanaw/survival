@@ -37,6 +37,19 @@ public class ImageObjet {
 		if(ressource.nombre==0){
 			g.setColor(new Color(30,30,30,200));
 			g.fillRoundRect(x,y,largeur,hauteur,10,10);
+		}
+		
+		if(active){
+				
+			Graphics2D g2d = (Graphics2D)g;         
+			GradientPaint gp = new GradientPaint(0, 0,  new Color(100,100,100,127), 1000, 0,new Color(30,30,30,127), true);                
+			g2d.setPaint(gp);
+			g2d.fillRoundRect(1100,540,720,220,20,20);
+			
+			g.setColor( new Color(100,100,100,127));
+			g.drawRoundRect(1105,545,710,210,20,20);
+			g.drawRoundRect(1104,544,712,212,20,20);
+			
 		}		
 	}
 

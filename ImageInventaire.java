@@ -44,7 +44,8 @@ public class ImageInventaire {
 		g.fillOval(x+70,y+70,35,35);
 		g.setColor(new Color(100,100,100,127));
 		g.drawOval(x+73,y+73,29,29);
-		g.setColor(new Color(200,200,200,127));		
+		g.setColor(new Color(200,200,200,127));	
+		g.setFont(new Font("Tahoma", Font.ITALIC, 13));	
 		g.drawString(""+ressource.nombre,x+82,y+92);
 		
 		if(active){
@@ -57,6 +58,10 @@ public class ImageInventaire {
 			g.setColor( new Color(100,100,100,127));
 			g.drawRoundRect(1105,545,710,210,20,20);
 			g.drawRoundRect(1104,544,712,212,20,20);
+			
+			g.setFont(new Font("Tahoma", Font.ITALIC, 30));
+			g.setColor(new Color(200,200,200,240));
+			g.drawString(this.ressource.description,1130,650);
 			
 		}
 		

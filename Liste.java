@@ -196,17 +196,17 @@ public class Liste {
 
 	
 	//Ressources
-	public static Ressource ressource_bois = new Ressource(10,"bois.png");
-	public static Ressource ressource_metal = new Ressource(10,"metal.png");
-	public static Ressource ressource_viande = new Ressource(10,"viande.png");
-	public static Ressource ressource_peau = new Ressource(10,"peau.png");
-	public static Ressource ressource_pierre = new Ressource(10,"pierre.png");
+	public static Ressource ressource_bois = new Ressource(10,"bois.png","description bois");
+	public static Ressource ressource_metal = new Ressource(10,"metal.png","description metal");
+	public static Ressource ressource_viande = new Ressource(10,"viande.png","description viande");
+	public static Ressource ressource_peau = new Ressource(10,"peau.png","description peau");
+	public static Ressource ressource_pierre = new Ressource(10,"pierre.png","description pierre");
 	
-	public static Ressource objet_cape = new Ressource(1,"cape.png");
-	public static Ressource objet_hache = new Ressource(1,"hache.png");
-	public static Ressource objet_botte = new Ressource(1,"botte.png");
-	public static Ressource objet_bouclier = new Ressource(1,"bouclier.png");
-	public static Ressource objet_casque = new Ressource(1,"casque.png");
+	public static Ressource objet_cape = new Ressource(1,"cape.png","description cape");
+	public static Ressource objet_hache = new Ressource(1,"hache.png","description hache");
+	public static Ressource objet_botte = new Ressource(1,"botte.png","description botte");
+	public static Ressource objet_bouclier = new Ressource(1,"bouclier.png","description bouclier");
+	public static Ressource objet_casque = new Ressource(1,"casque.png","description casque");
 	
 	
 	//IMAGES ANIMÉES ;

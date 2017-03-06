@@ -208,7 +208,7 @@ public class FenetreInventaire extends JPanel implements ActionListener   {
 				liste_objets.get(compteurCurseur).active=true; 
 				    
 				if(compteurCurseur!=compteurCurseurBefor){
-					liste_objets.get(compteurCurseur).active=false; 
+					liste_objets.get(compteurCurseurBefor).active=false; 
 				}
 			}
 			
