@@ -30,18 +30,15 @@ public class Item {
 		if(Fenetre.j1.getCollisionBounds(0,0).intersects(bords)){ // SI LE JOUEUR EST EN COLLISION AVEC L'ITEM, PRENDRE = true
 			prendre = true;
 			
-			for(int i =0; i<Fenetre.j1.ressources_joueur.size();i++){
+			for(int i =0; i<3;i++){
 				
-				if(Fenetre.j1.ressources_joueur.get(i).nom == nom){
-					Fenetre.j1.ressources_joueur.get(i).ajouterRessource();
+				if(Fenetre.j1.ressources_joueur[i].nom == nom){
+					Fenetre.j1.ressources_joueur[i].ajouterRessource();
 					System.out.println(" Ajout du "+nom );
 					ajout = true;
 				}
 			}
-			if(!ajout){
-				Fenetre.j1.ressources_joueur.add(new Ressource(1,nom,false));
-				System.out.println(" Ajout de la ressource "+nom );
-			}
+			
 			ajout = false;
 			
 		}

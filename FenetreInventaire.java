@@ -7,7 +7,6 @@ import java.awt.image.*;
 import java.awt.Graphics;
 import javax.imageio.*;
 import java.util.*;
-import javax.swing.Timer;
 
 
 
@@ -28,20 +27,9 @@ public class FenetreInventaire extends JPanel implements ActionListener   {
 	int compteurCurseurX = 0;
 	int compteurCurseurY = 0;
 	static Clavier clavier ;
-	int ix,iy,indice;
 	
-	
-	
-	
-	
-	
-	
-<<<<<<< HEAD
-	//ArrayList<ImageInventaire> liste_nourriture = new ArrayList<ImageInventaire>() ;
-=======
 	ArrayList<ImageInventaire> liste_ressources = new ArrayList<ImageInventaire>() ;
 	ArrayList<ImageObjet> liste_objets = new ArrayList<ImageObjet>() ;
->>>>>>> origin/master
 	
 	boolean afficher_liste_ressources = false;
 	boolean afficher_liste_objets = true;
@@ -55,9 +43,6 @@ public class FenetreInventaire extends JPanel implements ActionListener   {
 		this.LARGEUR_FENETRE = LARGEUR_FENETRE;
 		this.monBuf = new BufferedImage(LARGEUR_FENETRE,HAUTEUR_FENETRE,BufferedImage.TYPE_INT_RGB);
 		
-<<<<<<< HEAD
-		
-=======
 		//Init ArrayList
 		for(int i=0;i<3;i++){
 			liste_ressources.add(new ImageInventaire(jeu.fenetre_JEU.j1.ressources_joueur[i],false));
@@ -65,12 +50,11 @@ public class FenetreInventaire extends JPanel implements ActionListener   {
 		for(int i=0;i<3;i++){
 			liste_objets.add(new ImageObjet(jeu.fenetre_JEU.j1.objets_joueur[i],false,this));
 		}
->>>>>>> origin/master
 		
 		//Chargement des images
 		fond = jeu.fenetre_JEU.screen ;
 		
-		timer = new Timer(100,this);
+		timer = new javax.swing.Timer(100,this);
 		timer.start();	
 				
 	}
@@ -122,14 +106,13 @@ public class FenetreInventaire extends JPanel implements ActionListener   {
 				buffer.setColor(new Color(100,100,100,100));
 				buffer.fillRoundRect(100+120*j,300+120*i,100,100,10,10);
 				if(afficher_liste_ressources){
-					if(5*i+j<Fenetre.j1.ressources_joueur.size()){
-						Fenetre.j1.ressources_joueur.get(5*i+j).dessine(buffer,this,100+120*j,300+120*i);
+					if(5*i+j<liste_ressources.size()){
+						liste_ressources.get(5*i+j).dessine(buffer,this,100+120*j,300+120*i);
 					}
 				}
 				if(afficher_liste_objets){
-					if(5*i+j<Fenetre.j1.objets_joueur.size()){
-						Fenetre.j1.objets_joueur.get(5*i+j).dessine(buffer,this,100+120*j,300+120*i);
-						
+					if(5*i+j<liste_objets.size()){
+						liste_objets.get(5*i+j).dessine(buffer,this,100+120*j,300+120*i);
 					}
 				}
 			}
@@ -138,75 +121,27 @@ public class FenetreInventaire extends JPanel implements ActionListener   {
 		int largeur = 100 ;
 		int hauteur = 100 ;
 		
-		if(afficher_liste_ressources){
-			if(Fenetre.j1.ressources_joueur.size() >0){
-				buffer.setColor(Color.white);
-				buffer.drawRoundRect(xCurseur,yCurseur,largeur,hauteur,10,10);
-				buffer.drawRoundRect(xCurseur+1,yCurseur+1,largeur-2,hauteur-2,10,10);
-				buffer.drawRoundRect(xCurseur+2,yCurseur+2,largeur-4,hauteur-4,10,10);
-				buffer.drawRoundRect(xCurseur+3,yCurseur+3,largeur-6,hauteur-6,10,10);
-				
-				int[] xPoints = {xCurseur,xCurseur+20,xCurseur};
-				int[] yPoints = {yCurseur,yCurseur,yCurseur+20};
-				buffer.fillPolygon(xPoints,yPoints,3);
-				
-				int[] xPoints2 = {xCurseur+largeur,xCurseur+largeur-20,xCurseur+largeur};
-				int[] yPoints2 = {yCurseur,yCurseur,yCurseur+20};
-				buffer.fillPolygon(xPoints2,yPoints2,3);
-				
-				int[] xPoints3 = {xCurseur,xCurseur+20,xCurseur};
-				int[] yPoints3 = {yCurseur+hauteur,yCurseur+hauteur,yCurseur+hauteur-20};
-				buffer.fillPolygon(xPoints3,yPoints3,3);
-				
-				int[] xPoints4 = {xCurseur+largeur,xCurseur+largeur-20,xCurseur+largeur};
-				int[] yPoints4 = {yCurseur+hauteur,yCurseur+hauteur,yCurseur+hauteur-20};
-				buffer.fillPolygon(xPoints4,yPoints4,3);
-				
-				buffer.drawImage(Fenetre.j1.ressources_joueur.get(indice).image,1200,300,400,400,this);
-				
-				police = new Font("Tahoma", Font.BOLD, 30);
-				buffer.setFont(police);
-				buffer.drawString(Fenetre.j1.ressources_joueur.get(indice).description(),1200,750);
-				
-				
-			}
-		}
-		if(afficher_liste_objets){
-			if(Fenetre.j1.objets_joueur.size() >0){
-				buffer.setColor(Color.white);
-				buffer.drawRoundRect(xCurseur,yCurseur,largeur,hauteur,10,10);
-				buffer.drawRoundRect(xCurseur+1,yCurseur+1,largeur-2,hauteur-2,10,10);
-				buffer.drawRoundRect(xCurseur+2,yCurseur+2,largeur-4,hauteur-4,10,10);
-				buffer.drawRoundRect(xCurseur+3,yCurseur+3,largeur-6,hauteur-6,10,10);
-				
-				int[] xPoints = {xCurseur,xCurseur+20,xCurseur};
-				int[] yPoints = {yCurseur,yCurseur,yCurseur+20};
-				buffer.fillPolygon(xPoints,yPoints,3);
-				
-				int[] xPoints2 = {xCurseur+largeur,xCurseur+largeur-20,xCurseur+largeur};
-				int[] yPoints2 = {yCurseur,yCurseur,yCurseur+20};
-				buffer.fillPolygon(xPoints2,yPoints2,3);
-				
-				int[] xPoints3 = {xCurseur,xCurseur+20,xCurseur};
-				int[] yPoints3 = {yCurseur+hauteur,yCurseur+hauteur,yCurseur+hauteur-20};
-				buffer.fillPolygon(xPoints3,yPoints3,3);
-				
-				int[] xPoints4 = {xCurseur+largeur,xCurseur+largeur-20,xCurseur+largeur};
-				int[] yPoints4 = {yCurseur+hauteur,yCurseur+hauteur,yCurseur+hauteur-20};
-				buffer.fillPolygon(xPoints4,yPoints4,3);
-				
-				buffer.drawImage(Fenetre.j1.objets_joueur.get(indice).image,1200,300,400,400,this);
-				
-				police = new Font("Tahoma", Font.BOLD, 30);
-				buffer.setFont(police);
-				buffer.drawString(Fenetre.j1.objets_joueur.get(indice).description(),900,750);
-				
-				
-			}
-		}
+		buffer.setColor(Color.white);
+		buffer.drawRoundRect(xCurseur,yCurseur,largeur,hauteur,10,10);
+		buffer.drawRoundRect(xCurseur+1,yCurseur+1,largeur-2,hauteur-2,10,10);
+		buffer.drawRoundRect(xCurseur+2,yCurseur+2,largeur-4,hauteur-4,10,10);
+		buffer.drawRoundRect(xCurseur+3,yCurseur+3,largeur-6,hauteur-6,10,10);
 		
+		int[] xPoints = {xCurseur,xCurseur+20,xCurseur};
+		int[] yPoints = {yCurseur,yCurseur,yCurseur+20};
+		buffer.fillPolygon(xPoints,yPoints,3);
 		
+		int[] xPoints2 = {xCurseur+largeur,xCurseur+largeur-20,xCurseur+largeur};
+		int[] yPoints2 = {yCurseur,yCurseur,yCurseur+20};
+		buffer.fillPolygon(xPoints2,yPoints2,3);
 		
+		int[] xPoints3 = {xCurseur,xCurseur+20,xCurseur};
+		int[] yPoints3 = {yCurseur+hauteur,yCurseur+hauteur,yCurseur+hauteur-20};
+		buffer.fillPolygon(xPoints3,yPoints3,3);
+		
+		int[] xPoints4 = {xCurseur+largeur,xCurseur+largeur-20,xCurseur+largeur};
+		int[] yPoints4 = {yCurseur+hauteur,yCurseur+hauteur,yCurseur+hauteur-20};
+		buffer.fillPolygon(xPoints4,yPoints4,3);
 		
 		buffer.setColor(new Color(100,100,100,200));
 		buffer.fillRect(0,0,LARGEUR_FENETRE,HAUTEUR_FENETRE/5);
@@ -218,12 +153,7 @@ public class FenetreInventaire extends JPanel implements ActionListener   {
 		buffer.drawString(jeu.fenetre_JEU.j1.nom,LARGEUR_FENETRE/2-100,150);
 		
 		buffer.setColor(new Color(218,29,29,240));
-		buffer.fillRoundRect(150,100,jeu.fenetre_JEU.j1.vie,15,20,20);
-		
-		
-		
-		
-		
+		buffer.fillRoundRect(150,100,jeu.fenetre_JEU.j1.pv/6,15,20,20);
 				
 		g.drawImage(monBuf,0,0,this);
 		
@@ -232,124 +162,29 @@ public class FenetreInventaire extends JPanel implements ActionListener   {
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-<<<<<<< HEAD
-		ix=0;
-		iy=0;
-		indice=0;
-			
-		ix = (xCurseur-100)/120;
-		iy= ((yCurseur-300)/120)*5;
-				
-		indice = ix + iy;
-		
-		
-		
-		System.out.println(indice+" "+iy);
-		
-		if(show ){
-			
-			if(afficher_liste_ressources){
-				if(clavier.keyToutJusteAppuie(KeyEvent.VK_UP)) {
-					if(iy>0 )
-						yCurseur-=120;
-					
-						
-						
-				}if(clavier.keyToutJusteAppuie(KeyEvent.VK_DOWN )) {
-					if(iy/5<3 && Fenetre.j1.ressources_joueur.size()>indice+5)
-						yCurseur+=120;
-				
-						
-				}if(clavier.keyToutJusteAppuie(KeyEvent.VK_LEFT)) {
-					if(ix>0 )
-						xCurseur-=120;
-					else{
-						afficher_liste_ressources=false;
-						afficher_liste_objets = true;
-						xCurseur=100;
-						yCurseur=300;
-					}
-						
-				}if(clavier.keyToutJusteAppuie(KeyEvent.VK_RIGHT)) {
-					if(ix<4 && Fenetre.j1.ressources_joueur.size()>indice+1)
-						xCurseur+=120;
-					else{
-						afficher_liste_ressources=false;
-						afficher_liste_objets = true;
-						xCurseur=100;
-						yCurseur=300;
-					}	
-				}
-			}
-			else if(afficher_liste_objets){
-				if(clavier.keyToutJusteAppuie(KeyEvent.VK_UP)) {
-					if(iy>0 )
-						yCurseur-=120;
-					
-						
-						
-				}if(clavier.keyToutJusteAppuie(KeyEvent.VK_DOWN )) {
-					if(iy/5<3 && Fenetre.j1.objets_joueur.size()>indice+5)
-						yCurseur+=120;
-					
-						
-				}if(clavier.keyToutJusteAppuie(KeyEvent.VK_LEFT)) {
-					if(ix>0 )
-						xCurseur-=120;
-					else{
-						afficher_liste_objets = false;
-						afficher_liste_ressources=true;
-						xCurseur=100;
-						yCurseur=300;
-						
-					}
-						
-				}if(clavier.keyToutJusteAppuie(KeyEvent.VK_RIGHT)) {
-					if(ix<4 && Fenetre.j1.objets_joueur.size()>indice+1)
-						xCurseur+=120;
-					else{
-						afficher_liste_objets = false;
-						afficher_liste_ressources=true;
-						xCurseur=100;
-						yCurseur=300;
-						
-					}	
-				}
-				
-				if(clavier.keyToutJusteAppuie(KeyEvent.VK_ENTER) && Fenetre.j1.objets_joueur.get(indice).recetteComplete())
-					Fenetre.j1.objets_joueur.get(indice).ajouterRessource();
-				
-				
-				
-				
-			}
-			
-		
-			
-=======
 		
 		if(show){
 			if(afficher_liste_objets){
 				
 				compteurCurseurBefor=compteurCurseur;
 				
-				if(clavier.up && compteurCurseurY>0 && compteurCurseur>0 && compteurCurseur<liste_objets.size()) {
+				if(clavier.keyToutJusteAppuie(KeyEvent.VK_UP) && compteurCurseurY>0 && compteurCurseur>0 && compteurCurseur<liste_objets.size()) {
 					yCurseur-=120;
 					compteurCurseur-=5;
 					compteurCurseurY-=1;
-				}else if(clavier.down && compteurCurseurY<3 && compteurCurseur>=0 && compteurCurseur<liste_objets.size()-5) {
+				}else if(clavier.keyToutJusteAppuie(KeyEvent.VK_DOWN) && compteurCurseurY<3 && compteurCurseur>=0 && compteurCurseur<liste_objets.size()-5) {
 					yCurseur+=120;
 					compteurCurseur+=5;
 					compteurCurseurY+=1;
-				}else if(clavier.left && compteurCurseurX>0 && compteurCurseur>0 && compteurCurseur<liste_objets.size()) {
+				}else if(clavier.keyToutJusteAppuie(KeyEvent.VK_LEFT) && compteurCurseurX>0 && compteurCurseur>0 && compteurCurseur<liste_objets.size()) {
 					xCurseur-=120;
 					compteurCurseur-=1;
 					compteurCurseurX-=1;
-				}else if(clavier.right && compteurCurseurX<4 && compteurCurseur>=0 && compteurCurseur<liste_objets.size()-1) {
+				}else if(clavier.keyToutJusteAppuie(KeyEvent.VK_RIGHT) && compteurCurseurX<4 && compteurCurseur>=0 && compteurCurseur<liste_objets.size()-1) {
 					xCurseur+=120;
 					compteurCurseur+=1;
 					compteurCurseurX+=1;
-				}else if(clavier.left) {
+				}else if(clavier.keyToutJusteAppuie(KeyEvent.VK_LEFT)) {
 					xCurseur =  100 ;
 					yCurseur = 300 ;
 					compteurCurseur = 0 ; 
@@ -357,7 +192,7 @@ public class FenetreInventaire extends JPanel implements ActionListener   {
 					compteurCurseurY = 0;
 					afficher_liste_objets = false ;
 					afficher_liste_ressources = true ;
-				}else if(clavier.right) {
+				}else if(clavier.keyToutJusteAppuie(KeyEvent.VK_RIGHT)) {
 					xCurseur =  100 ;
 					yCurseur = 300 ;
 					compteurCurseur = 0 ; 
@@ -379,23 +214,23 @@ public class FenetreInventaire extends JPanel implements ActionListener   {
 				
 				compteurCurseurBefor=compteurCurseur;
 				
-				if(clavier.up && compteurCurseurY>0 && compteurCurseur>0 && compteurCurseur<liste_ressources.size()) {
+				if(clavier.keyToutJusteAppuie(KeyEvent.VK_UP) && compteurCurseurY>0 && compteurCurseur>0 && compteurCurseur<liste_ressources.size()) {
 					yCurseur-=120;
 					compteurCurseur-=5;
 					compteurCurseurY-=1;
-				}else if(clavier.down && compteurCurseurY<3 && compteurCurseur>=0 && compteurCurseur<liste_ressources.size()-5) {
+				}else if(clavier.keyToutJusteAppuie(KeyEvent.VK_DOWN) && compteurCurseurY<3 && compteurCurseur>=0 && compteurCurseur<liste_ressources.size()-5) {
 					yCurseur+=120;
 					compteurCurseur+=5;
 					compteurCurseurY+=1;
-				}else if(clavier.left && compteurCurseurX>0 && compteurCurseur>0 && compteurCurseur<liste_ressources.size()) {
+				}else if(clavier.keyToutJusteAppuie(KeyEvent.VK_LEFT) && compteurCurseurX>0 && compteurCurseur>0 && compteurCurseur<liste_ressources.size()) {
 					xCurseur-=120;
 					compteurCurseur-=1;
 					compteurCurseurX-=1;
-				}else if(clavier.right && compteurCurseurX<4 && compteurCurseur>=0 && compteurCurseur<liste_ressources.size()-1) {
+				}else if(clavier.keyToutJusteAppuie(KeyEvent.VK_RIGHT) && compteurCurseurX<4 && compteurCurseur>=0 && compteurCurseur<liste_ressources.size()-1) {
 					xCurseur+=120;
 					compteurCurseur+=1;
 					compteurCurseurX+=1;
-				}else if(clavier.left) {
+				}else if(clavier.keyToutJusteAppuie(KeyEvent.VK_LEFT)) {
 					xCurseur =  100 ;
 					yCurseur = 300 ;
 					compteurCurseur = 0 ; 
@@ -403,7 +238,7 @@ public class FenetreInventaire extends JPanel implements ActionListener   {
 					compteurCurseurY = 0;
 					afficher_liste_objets = true ;
 					afficher_liste_ressources = false ;
-				}else if(clavier.right) {
+				}else if(clavier.keyToutJusteAppuie(KeyEvent.VK_RIGHT)) {
 					xCurseur =  100 ;
 					yCurseur = 300 ;
 					compteurCurseur = 0 ; 
@@ -422,7 +257,6 @@ public class FenetreInventaire extends JPanel implements ActionListener   {
 				
 			}
 			
->>>>>>> origin/master
 			
 			
 			
@@ -439,10 +273,5 @@ public class FenetreInventaire extends JPanel implements ActionListener   {
 			repaint();
 		}	
 	}
-	
-	
-	
-	
-	
 		  
 }

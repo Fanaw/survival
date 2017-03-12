@@ -14,6 +14,7 @@ public class Joueur extends Creature {
 	 
 	int nourriture = 1000 ;
 	int eau = 1000;
+	int pv=1000;
 	
 	static int largeur = 60;
 	static int hauteur = 60;
@@ -23,15 +24,6 @@ public class Joueur extends Creature {
 		bords.x = 5;
 		bords.y = 30;
 		bords.width =50;
-<<<<<<< HEAD
-		bords.height = 30;
-		vie=100;
-	
-		objets_joueur.add(new Ressource(0,"bottes",true));
-		objets_joueur.add(new Ressource(0,"bouclier",true));
-		objets_joueur.add(new Ressource(0,"cape",true));
-		objets_joueur.add(new Ressource(0,"casque",true));
-=======
 		bords.height = 32;
 		
 		//liste de ressources
@@ -44,7 +36,6 @@ public class Joueur extends Creature {
 		objets_joueur[1]=Liste.objet_epee;
 		objets_joueur[2]=Liste.objet_bouclier;
 		
->>>>>>> origin/master
 	
 	}
 
