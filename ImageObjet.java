@@ -59,17 +59,19 @@ public class ImageObjet {
 			g.drawString("pierre : "+this.objet.pierre,1130,690);
 			g.drawString("metal : "+this.objet.metal,1130,730);
 			
+			if(fenetre_INVENTAIRE.jeu.clavier.enter && fenetre_INVENTAIRE.jeu.fenetre_JEU.j1.ressources_joueur[0].nombre>=objet.bois && fenetre_INVENTAIRE.jeu.fenetre_JEU.j1.ressources_joueur[1].nombre>=objet.pierre && fenetre_INVENTAIRE.jeu.fenetre_JEU.j1.ressources_joueur[2].nombre>=objet.metal){
+			
+				objet.exister=true;
+				fenetre_INVENTAIRE.jeu.fenetre_JEU.j1.ressources_joueur[0].nombre-=objet.bois;
+				fenetre_INVENTAIRE.jeu.fenetre_JEU.j1.ressources_joueur[1].nombre-=objet.pierre;
+				fenetre_INVENTAIRE.jeu.fenetre_JEU.j1.ressources_joueur[2].nombre-=objet.metal;
+				
+			
+			}
+
+			
 		}		
 		
-		if(fenetre_INVENTAIRE.jeu.clavier.enter && fenetre_INVENTAIRE.jeu.fenetre_JEU.j1.ressources_joueur[0].nombre>=objet.bois && fenetre_INVENTAIRE.jeu.fenetre_JEU.j1.ressources_joueur[1].nombre>=objet.pierre && fenetre_INVENTAIRE.jeu.fenetre_JEU.j1.ressources_joueur[2].nombre>=objet.metal){
-		
-			objet.exister=true;
-			fenetre_INVENTAIRE.jeu.fenetre_JEU.j1.ressources_joueur[0].nombre-=objet.bois;
-			fenetre_INVENTAIRE.jeu.fenetre_JEU.j1.ressources_joueur[1].nombre-=objet.pierre;
-			fenetre_INVENTAIRE.jeu.fenetre_JEU.j1.ressources_joueur[2].nombre-=objet.metal;
-			
-		
-		}
 	}
 
 }
