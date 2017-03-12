@@ -29,5 +29,30 @@ public class Outil {// CODE POUR LIRE UN FICHIER ET RESSORTIR UNE VARIABLE TEXTE
 			return 0;
 		}
 	}
+	
+	public static int rechercherNombreRessource(String nom){
+		
+		if(Fenetre.j1.ressources_joueur.size()>0){
+			for(int i = 0; i < Fenetre.j1.ressources_joueur.size();i++){
+				if(Fenetre.j1.ressources_joueur.get(i).nom==nom)
+					return Fenetre.j1.ressources_joueur.get(i).nombre;
+		
+			}
+			
+		}
+		return 0;
+	}
+	public static void setNombreRessource(String nom,int n){
+		
+		if(Fenetre.j1.ressources_joueur.size()>0){
+			for(int i = 0; i < Fenetre.j1.ressources_joueur.size();i++){
+				if(Fenetre.j1.ressources_joueur.get(i).nom==nom)
+					Fenetre.j1.ressources_joueur.get(i).nombre-=n;
+		
+			}
+			
+		}
+		
+	}
 
 }

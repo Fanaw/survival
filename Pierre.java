@@ -7,8 +7,8 @@ public class Pierre extends Entite{
 	
 
 	private BufferedImage image;
-	static int largeur = 200;
-	static int hauteur = 200;
+	static int largeur = 100;
+	static int hauteur = 100;
 	
 	public Pierre(float x, float y, BufferedImage img){
 		super(x,y,largeur,hauteur);
@@ -17,12 +17,12 @@ public class Pierre extends Entite{
 	
 	
 	public void meurt(){
-		Fenetre.gItem.addItem(Liste.iPierre.nouvelItem((int)x,(int) y));
+		Fenetre.gItem.addItem(Liste.iPierre.nouvelItem((int)x+largeur/3,(int) y+hauteur/3));
 	}
 	
 	public void dessine(Graphics g, JPanel jp){
 		g.drawImage(image, (int) (x - Fenetre.camera.getxOffset()) , (int) (y - Fenetre.camera.getyOffset()), largeur, hauteur, jp);
-		g.setColor(Color.red);
-		g.fillRect((int) (x-Fenetre.camera.getxOffset()), (int) (y+largeur - Fenetre.camera.getyOffset()), vie*largeur/10, 20);
+		//g.setColor(Color.red);
+		//g.fillRect((int) (x-Fenetre.camera.getxOffset()), (int) (y+largeur - Fenetre.camera.getyOffset()), vie*largeur/10, 20);
 	}
 }

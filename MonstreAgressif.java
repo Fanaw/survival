@@ -26,10 +26,10 @@ public class MonstreAgressif extends Monstre{
 			}else{
 				
 					if(x>Fenetre.j1.x && x>Fenetre.j1.x+Fenetre.j1.largeur){
-						xMove-=vitesse/4;
+						xMove-=vitesse/2;
 						direction = 2;
 					}else if(x<Fenetre.j1.x && x<= Fenetre.j1.x+Fenetre.j1.largeur){
-						xMove+=vitesse/4;
+						xMove+=vitesse/2;
 						direction = 3;
 					}else if(x>=Fenetre.j1.x && x<=Fenetre.j1.x+Fenetre.j1.largeur)
 						xMove=0;
@@ -38,10 +38,10 @@ public class MonstreAgressif extends Monstre{
 						
 							
 					if(y>Fenetre.j1.y && y>Fenetre.j1.y+Fenetre.j1.hauteur){
-						yMove-=vitesse/4;
+						yMove-=vitesse/2;
 						direction = 1;
 					}else if(y<Fenetre.j1.y && y<Fenetre.j1.y+Fenetre.j1.hauteur){
-						yMove+=vitesse/4;
+						yMove+=vitesse/2;
 						direction =0;
 					}else if(y>=Fenetre.j1.y && y <=Fenetre.j1.y+Fenetre.j1.hauteur)
 						yMove=0;

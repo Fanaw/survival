@@ -9,49 +9,33 @@ public class Joueur extends Creature {
 	ArrayList<Ressource> ressources_joueur = new ArrayList<Ressource>();
 	ArrayList<Ressource> objets_joueur = new ArrayList<Ressource>();
 	
-	String nom = "AssouB" ;
+	String nom = "Kardha-Chiant" ;
 	
-	int pv = 1000 ; 
+	 
 	int nourriture = 1000 ;
 	int eau = 1000;
 	
-	static int largeur = 100;
-	static int hauteur = 100;
+	static int largeur = 60;
+	static int hauteur = 60;
 	
 	public Joueur(float x, float y) {
 		super(x, y, largeur, hauteur);
-		bords.x = 7;
-		bords.y = 65;
+		bords.x = 5;
+		bords.y = 30;
 		bords.width =50;
-		bords.height = 32;
-		
-		//liste de ressources
-		ressources_joueur.add(Liste.ressource_bois);
-		ressources_joueur.add(Liste.ressource_metal);
-		ressources_joueur.add(Liste.ressource_peau);
-		ressources_joueur.add(Liste.ressource_pierre);
-		ressources_joueur.add(Liste.ressource_viande);
-		ressources_joueur.add(Liste.ressource_peau);
-		ressources_joueur.add(Liste.ressource_pierre);
-		ressources_joueur.add(Liste.ressource_viande);
-		ressources_joueur.add(Liste.ressource_bois);
-		ressources_joueur.add(Liste.ressource_metal);
-		ressources_joueur.add(Liste.ressource_peau);
-		ressources_joueur.add(Liste.ressource_pierre);
-		ressources_joueur.add(Liste.ressource_viande);
-		
-		//liste d'objets
-		objets_joueur.add(Liste.objet_botte);
-		objets_joueur.add(Liste.objet_bouclier);
-		objets_joueur.add(Liste.objet_cape);
-		objets_joueur.add(Liste.objet_casque);
-		objets_joueur.add(Liste.objet_hache);
-		
+		bords.height = 30;
+		vie=100;
+	
+		objets_joueur.add(new Ressource(0,"bottes",true));
+		objets_joueur.add(new Ressource(0,"bouclier",true));
+		objets_joueur.add(new Ressource(0,"cape",true));
+		objets_joueur.add(new Ressource(0,"casque",true));
 	
 	}
 
 	
 	public void tick() {
+		
 		getClavier();
 		move();
 		Fenetre.camera.centrerSurCreature(this);

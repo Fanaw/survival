@@ -6,12 +6,12 @@ import javax.swing.JPanel;
 public class Tile {
 	
 	
-	
-	public static NotSolidTile test =  new NotSolidTile(Liste.herbe,0);
-	
+	float xtile,ytile;
 	
 	
-	public static final int largeur = 75, hauteur = 75;
+	
+	
+	public static final int largeur = 50, hauteur = 50;
 	
 	protected BufferedImage texture;
 	protected final int id;
@@ -26,8 +26,11 @@ public class Tile {
 	public void tick(){
 		
 	}
+	public void dessine2(Graphics g,JPanel jp){}
 	
 	public void dessine(Graphics g,JPanel jf, int x, int y){
+		xtile=x+Fenetre.camera.getxOffset();
+		ytile=y+Fenetre.camera.getyOffset();
 		g.drawImage(texture, x, y, largeur, hauteur, jf);
 	}
 	

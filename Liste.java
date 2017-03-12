@@ -87,8 +87,9 @@ public class Liste {
 	public static BufferedImage maison37 = ImageLoader.ImgLoaderSpe("Sprite1.png", 96, 144, 16, 16);
 	public static BufferedImage maison38 = ImageLoader.ImgLoaderSpe("Sprite1.png", 112, 144, 16, 16);
 	public static BufferedImage arbre = ImageLoader.ImgLoader("arbre.gif");
-	public static BufferedImage bois = ImageLoader.ImgLoader("bois.gif");
+	public static BufferedImage bois = ImageLoader.ImgLoader("bois.png");
 	public static BufferedImage pierre = ImageLoader.ImgLoader("pierre.gif");
+	public static BufferedImage viande = ImageLoader.ImgLoader("viande.png");
 	public static BufferedImage disparition1 = ImageLoader.ImgLoaderSpe("disparition.gif", 0, 0, 16, 16);
 	public static BufferedImage disparition2 = ImageLoader.ImgLoaderSpe("disparition.gif", 16, 0, 16, 16);
 	
@@ -175,8 +176,8 @@ public class Liste {
 	public static SolidTile TileMaison30 = new SolidTile(maison30,56);
 	public static SolidTile TileMaison31 = new SolidTile(maison31,57);
 	public static SolidTile TileMaison32 = new SolidTile(maison32,58);
-	public static SolidTile TileMaison33 = new SolidTile(maison33,59);
-	public static SolidTile TileMaison34 = new SolidTile(maison34,60);
+	public static SolidTile TileMaison33 = new TelepoTile(maison33,59);//lui
+	public static SolidTile TileMaison34 = new TelepoTile(maison34,60);//lui
 	public static SolidTile TileMaison35 = new SolidTile(maison35,61);
 	public static SolidTile TileMaison36 = new SolidTile(maison36,62);
 	public static NotSolidTile TileMaison37 = new NotSolidTile(maison37,64);
@@ -191,22 +192,13 @@ public class Liste {
 	
 	public static Item iBois = new Item("bois",bois,0);
 	public static Item iPierre = new Item("pierre",pierre,1);
-	
+	public static Item iViande = new Item("viande",viande,2);
 	
 
 	
-	//Ressources
-	public static Ressource ressource_bois = new Ressource(10,"bois.png");
-	public static Ressource ressource_metal = new Ressource(10,"metal.png");
-	public static Ressource ressource_viande = new Ressource(10,"viande.png");
-	public static Ressource ressource_peau = new Ressource(10,"peau.png");
-	public static Ressource ressource_pierre = new Ressource(10,"pierre.png");
 	
-	public static Ressource objet_cape = new Ressource(1,"cape.png");
-	public static Ressource objet_hache = new Ressource(1,"hache.png");
-	public static Ressource objet_botte = new Ressource(1,"botte.png");
-	public static Ressource objet_bouclier = new Ressource(1,"bouclier.png");
-	public static Ressource objet_casque = new Ressource(1,"casque.png");
+	
+	
 	
 	
 	//IMAGES ANIMÉES ;

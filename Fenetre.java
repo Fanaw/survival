@@ -37,13 +37,21 @@ public class Fenetre extends JPanel implements ActionListener {
 		
 		monde = new Monde("world2.txt");
 		j1 = new Joueur(monde.getSpawnX(),monde.getSpawnY());
-		m1 = new MonstreAgressif(2500,800,100,100);
+		m1 = new MonstreAgressif(1000,800,50,50);
 		camera = new Camera(0,0);
 		
 		
 		gEntite = new GestionEntite();
-		gEntite.addEntite(new Arbre(1000,2300,Liste.arbre));
-		gEntite.addEntite(new Pierre(2000,2300,Liste.pierre));
+		
+		gEntite.addEntite(new Arbre(300,600,Liste.arbre));
+		gEntite.addEntite(new Arbre(200,400,Liste.arbre));
+		gEntite.addEntite(new Arbre(1000,500,Liste.arbre));
+		gEntite.addEntite(new Arbre(1500,300,Liste.arbre));
+		gEntite.addEntite(new Arbre(800,600,Liste.arbre));
+		gEntite.addEntite(new Arbre(350,1000,Liste.arbre));
+		gEntite.addEntite(new Pierre(200,400,Liste.pierre));
+		gEntite.addEntite(new Pierre(100,300,Liste.pierre));
+		gEntite.addEntite(new Pierre(200,800,Liste.pierre));
 		gEntite.addEntite(j1);
 		gEntite.addEntite(m1);
 		
@@ -90,7 +98,7 @@ public class Fenetre extends JPanel implements ActionListener {
 				this.show=false;
 				
 			}
-					
+			monde.tick();		
 			gEntite.tick();
 			gItem.tick();
 			Liste.animationTick();

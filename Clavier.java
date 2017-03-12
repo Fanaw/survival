@@ -4,14 +4,36 @@ import java.awt.event.KeyListener;
 public class Clavier implements KeyListener {
 
 	
-	boolean[] keys;
+	boolean[] keys, toutJusteAppuie, nePeutPasAppuie;
 	boolean up,down,left,right,shift,degatUp,degatDown,degatLeft,degatRight,enter,inventaire,exit;
 	public Clavier(){
 		keys = new boolean[256];
+		toutJusteAppuie = new boolean[keys.length];
+		nePeutPasAppuie = new boolean[keys.length];
 	}
 	
 	public void tick(){
 		int compteur = 0;
+		
+		for(int i = 0;i < keys.length;i++){
+			
+			
+			if(nePeutPasAppuie[i] && !keys[i]){
+				nePeutPasAppuie[i] = false;
+			}else if(toutJusteAppuie[i]){
+				nePeutPasAppuie[i] = true;
+				toutJusteAppuie[i] = false;
+			}
+			
+			
+			if(!nePeutPasAppuie[i] && keys[i]){
+				toutJusteAppuie[i] = true;
+			}
+			
+		}
+		
+		
+		
 		up=keys[KeyEvent.VK_UP];
 		down=keys[KeyEvent.VK_DOWN];
 		left=keys[KeyEvent.VK_LEFT];
@@ -31,6 +53,9 @@ public class Clavier implements KeyListener {
 		
 		
 		shift=keys[KeyEvent.VK_SHIFT];
+		
+		
+		
 		
 		
 		if(shift)
@@ -55,6 +80,7 @@ public class Clavier implements KeyListener {
 		keys[e.getKeyCode()]=true;
 		
 		
+		
 	}
 
 	@Override
@@ -62,6 +88,10 @@ public class Clavier implements KeyListener {
 		
 		keys[e.getKeyCode()]=false; 
 		
+	}
+	
+	public boolean keyToutJusteAppuie(int keyCode){
+		return toutJusteAppuie[keyCode];
 	}
 
 	@Override

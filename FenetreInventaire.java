@@ -7,6 +7,7 @@ import java.awt.image.*;
 import java.awt.Graphics;
 import javax.imageio.*;
 import java.util.*;
+import javax.swing.Timer;
 
 
 
@@ -23,9 +24,14 @@ public class FenetreInventaire extends JPanel implements ActionListener   {
 	int xCurseur =  100 ;
 	int yCurseur = 300 ;
 	static Clavier clavier ;
+	int ix,iy,indice;
 	
-	ArrayList<ImageInventaire> liste_ressources = new ArrayList<ImageInventaire>() ;
-	ArrayList<ImageInventaire> liste_objets = new ArrayList<ImageInventaire>() ;
+	
+	
+	
+	
+	
+	
 	//ArrayList<ImageInventaire> liste_nourriture = new ArrayList<ImageInventaire>() ;
 	
 	boolean afficher_liste_ressources = false;
@@ -41,18 +47,12 @@ public class FenetreInventaire extends JPanel implements ActionListener   {
 		this.LARGEUR_FENETRE = LARGEUR_FENETRE;
 		this.monBuf = new BufferedImage(LARGEUR_FENETRE,HAUTEUR_FENETRE,BufferedImage.TYPE_INT_RGB);
 		
-		//Init ArrayList
-		for(int i=0;i<jeu.fenetre_JEU.j1.ressources_joueur.size();i++){
-			liste_ressources.add(new ImageInventaire(jeu.fenetre_JEU.j1.ressources_joueur.get(i),false));
-		}
-		for(int i=0;i<jeu.fenetre_JEU.j1.objets_joueur.size();i++){
-			liste_objets.add(new ImageInventaire(jeu.fenetre_JEU.j1.objets_joueur.get(i),false));
-		}
+		
 		
 		//Chargement des images
 		fond = jeu.fenetre_JEU.screen ;
 		
-		timer = new javax.swing.Timer(100,this);
+		timer = new Timer(100,this);
 		timer.start();	
 				
 	}
@@ -104,13 +104,14 @@ public class FenetreInventaire extends JPanel implements ActionListener   {
 				buffer.setColor(new Color(100,100,100,100));
 				buffer.fillRoundRect(100+120*j,300+120*i,100,100,10,10);
 				if(afficher_liste_ressources){
-					if(5*i+j<liste_ressources.size()){
-						liste_ressources.get(5*i+j).dessine(buffer,this,100+120*j,300+120*i);
+					if(5*i+j<Fenetre.j1.ressources_joueur.size()){
+						Fenetre.j1.ressources_joueur.get(5*i+j).dessine(buffer,this,100+120*j,300+120*i);
 					}
 				}
 				if(afficher_liste_objets){
-					if(5*i+j<liste_objets.size()){
-						liste_objets.get(5*i+j).dessine(buffer,this,100+120*j,300+120*i);
+					if(5*i+j<Fenetre.j1.objets_joueur.size()){
+						Fenetre.j1.objets_joueur.get(5*i+j).dessine(buffer,this,100+120*j,300+120*i);
+						
 					}
 				}
 			}
@@ -119,27 +120,75 @@ public class FenetreInventaire extends JPanel implements ActionListener   {
 		int largeur = 100 ;
 		int hauteur = 100 ;
 		
-		buffer.setColor(Color.white);
-		buffer.drawRoundRect(xCurseur,yCurseur,largeur,hauteur,10,10);
-		buffer.drawRoundRect(xCurseur+1,yCurseur+1,largeur-2,hauteur-2,10,10);
-		buffer.drawRoundRect(xCurseur+2,yCurseur+2,largeur-4,hauteur-4,10,10);
-		buffer.drawRoundRect(xCurseur+3,yCurseur+3,largeur-6,hauteur-6,10,10);
+		if(afficher_liste_ressources){
+			if(Fenetre.j1.ressources_joueur.size() >0){
+				buffer.setColor(Color.white);
+				buffer.drawRoundRect(xCurseur,yCurseur,largeur,hauteur,10,10);
+				buffer.drawRoundRect(xCurseur+1,yCurseur+1,largeur-2,hauteur-2,10,10);
+				buffer.drawRoundRect(xCurseur+2,yCurseur+2,largeur-4,hauteur-4,10,10);
+				buffer.drawRoundRect(xCurseur+3,yCurseur+3,largeur-6,hauteur-6,10,10);
+				
+				int[] xPoints = {xCurseur,xCurseur+20,xCurseur};
+				int[] yPoints = {yCurseur,yCurseur,yCurseur+20};
+				buffer.fillPolygon(xPoints,yPoints,3);
+				
+				int[] xPoints2 = {xCurseur+largeur,xCurseur+largeur-20,xCurseur+largeur};
+				int[] yPoints2 = {yCurseur,yCurseur,yCurseur+20};
+				buffer.fillPolygon(xPoints2,yPoints2,3);
+				
+				int[] xPoints3 = {xCurseur,xCurseur+20,xCurseur};
+				int[] yPoints3 = {yCurseur+hauteur,yCurseur+hauteur,yCurseur+hauteur-20};
+				buffer.fillPolygon(xPoints3,yPoints3,3);
+				
+				int[] xPoints4 = {xCurseur+largeur,xCurseur+largeur-20,xCurseur+largeur};
+				int[] yPoints4 = {yCurseur+hauteur,yCurseur+hauteur,yCurseur+hauteur-20};
+				buffer.fillPolygon(xPoints4,yPoints4,3);
+				
+				buffer.drawImage(Fenetre.j1.ressources_joueur.get(indice).image,1200,300,400,400,this);
+				
+				police = new Font("Tahoma", Font.BOLD, 30);
+				buffer.setFont(police);
+				buffer.drawString(Fenetre.j1.ressources_joueur.get(indice).description(),1200,750);
+				
+				
+			}
+		}
+		if(afficher_liste_objets){
+			if(Fenetre.j1.objets_joueur.size() >0){
+				buffer.setColor(Color.white);
+				buffer.drawRoundRect(xCurseur,yCurseur,largeur,hauteur,10,10);
+				buffer.drawRoundRect(xCurseur+1,yCurseur+1,largeur-2,hauteur-2,10,10);
+				buffer.drawRoundRect(xCurseur+2,yCurseur+2,largeur-4,hauteur-4,10,10);
+				buffer.drawRoundRect(xCurseur+3,yCurseur+3,largeur-6,hauteur-6,10,10);
+				
+				int[] xPoints = {xCurseur,xCurseur+20,xCurseur};
+				int[] yPoints = {yCurseur,yCurseur,yCurseur+20};
+				buffer.fillPolygon(xPoints,yPoints,3);
+				
+				int[] xPoints2 = {xCurseur+largeur,xCurseur+largeur-20,xCurseur+largeur};
+				int[] yPoints2 = {yCurseur,yCurseur,yCurseur+20};
+				buffer.fillPolygon(xPoints2,yPoints2,3);
+				
+				int[] xPoints3 = {xCurseur,xCurseur+20,xCurseur};
+				int[] yPoints3 = {yCurseur+hauteur,yCurseur+hauteur,yCurseur+hauteur-20};
+				buffer.fillPolygon(xPoints3,yPoints3,3);
+				
+				int[] xPoints4 = {xCurseur+largeur,xCurseur+largeur-20,xCurseur+largeur};
+				int[] yPoints4 = {yCurseur+hauteur,yCurseur+hauteur,yCurseur+hauteur-20};
+				buffer.fillPolygon(xPoints4,yPoints4,3);
+				
+				buffer.drawImage(Fenetre.j1.objets_joueur.get(indice).image,1200,300,400,400,this);
+				
+				police = new Font("Tahoma", Font.BOLD, 30);
+				buffer.setFont(police);
+				buffer.drawString(Fenetre.j1.objets_joueur.get(indice).description(),900,750);
+				
+				
+			}
+		}
 		
-		int[] xPoints = {xCurseur,xCurseur+20,xCurseur};
-		int[] yPoints = {yCurseur,yCurseur,yCurseur+20};
-		buffer.fillPolygon(xPoints,yPoints,3);
 		
-		int[] xPoints2 = {xCurseur+largeur,xCurseur+largeur-20,xCurseur+largeur};
-		int[] yPoints2 = {yCurseur,yCurseur,yCurseur+20};
-		buffer.fillPolygon(xPoints2,yPoints2,3);
 		
-		int[] xPoints3 = {xCurseur,xCurseur+20,xCurseur};
-		int[] yPoints3 = {yCurseur+hauteur,yCurseur+hauteur,yCurseur+hauteur-20};
-		buffer.fillPolygon(xPoints3,yPoints3,3);
-		
-		int[] xPoints4 = {xCurseur+largeur,xCurseur+largeur-20,xCurseur+largeur};
-		int[] yPoints4 = {yCurseur+hauteur,yCurseur+hauteur,yCurseur+hauteur-20};
-		buffer.fillPolygon(xPoints4,yPoints4,3);
 		
 		buffer.setColor(new Color(100,100,100,200));
 		buffer.fillRect(0,0,LARGEUR_FENETRE,HAUTEUR_FENETRE/5);
@@ -151,7 +200,12 @@ public class FenetreInventaire extends JPanel implements ActionListener   {
 		buffer.drawString(jeu.fenetre_JEU.j1.nom,LARGEUR_FENETRE/2-100,150);
 		
 		buffer.setColor(new Color(218,29,29,240));
-		buffer.fillRoundRect(150,100,jeu.fenetre_JEU.j1.pv/6,15,20,20);
+		buffer.fillRoundRect(150,100,jeu.fenetre_JEU.j1.vie,15,20,20);
+		
+		
+		
+		
+		
 				
 		g.drawImage(monBuf,0,0,this);
 		
@@ -160,21 +214,101 @@ public class FenetreInventaire extends JPanel implements ActionListener   {
 	}
 	
 	public void actionPerformed(ActionEvent e) {
+		ix=0;
+		iy=0;
+		indice=0;
+			
+		ix = (xCurseur-100)/120;
+		iy= ((yCurseur-300)/120)*5;
+				
+		indice = ix + iy;
 		
-		if(show){
+		
+		
+		System.out.println(indice+" "+iy);
+		
+		if(show ){
 			
-			if(clavier.up) {
-				yCurseur-=120;
-			}if(clavier.down) {
-				yCurseur+=120;
-			}if(clavier.left) {
-				xCurseur-=120;
-			}if(clavier.right) {
-				xCurseur+=120;
-			}  
+			if(afficher_liste_ressources){
+				if(clavier.keyToutJusteAppuie(KeyEvent.VK_UP)) {
+					if(iy>0 )
+						yCurseur-=120;
+					
+						
+						
+				}if(clavier.keyToutJusteAppuie(KeyEvent.VK_DOWN )) {
+					if(iy/5<3 && Fenetre.j1.ressources_joueur.size()>indice+5)
+						yCurseur+=120;
 				
+						
+				}if(clavier.keyToutJusteAppuie(KeyEvent.VK_LEFT)) {
+					if(ix>0 )
+						xCurseur-=120;
+					else{
+						afficher_liste_ressources=false;
+						afficher_liste_objets = true;
+						xCurseur=100;
+						yCurseur=300;
+					}
+						
+				}if(clavier.keyToutJusteAppuie(KeyEvent.VK_RIGHT)) {
+					if(ix<4 && Fenetre.j1.ressources_joueur.size()>indice+1)
+						xCurseur+=120;
+					else{
+						afficher_liste_ressources=false;
+						afficher_liste_objets = true;
+						xCurseur=100;
+						yCurseur=300;
+					}	
+				}
+			}
+			else if(afficher_liste_objets){
+				if(clavier.keyToutJusteAppuie(KeyEvent.VK_UP)) {
+					if(iy>0 )
+						yCurseur-=120;
+					
+						
+						
+				}if(clavier.keyToutJusteAppuie(KeyEvent.VK_DOWN )) {
+					if(iy/5<3 && Fenetre.j1.objets_joueur.size()>indice+5)
+						yCurseur+=120;
+					
+						
+				}if(clavier.keyToutJusteAppuie(KeyEvent.VK_LEFT)) {
+					if(ix>0 )
+						xCurseur-=120;
+					else{
+						afficher_liste_objets = false;
+						afficher_liste_ressources=true;
+						xCurseur=100;
+						yCurseur=300;
+						
+					}
+						
+				}if(clavier.keyToutJusteAppuie(KeyEvent.VK_RIGHT)) {
+					if(ix<4 && Fenetre.j1.objets_joueur.size()>indice+1)
+						xCurseur+=120;
+					else{
+						afficher_liste_objets = false;
+						afficher_liste_ressources=true;
+						xCurseur=100;
+						yCurseur=300;
+						
+					}	
+				}
+				
+				if(clavier.keyToutJusteAppuie(KeyEvent.VK_ENTER) && Fenetre.j1.objets_joueur.get(indice).recetteComplete())
+					Fenetre.j1.objets_joueur.get(indice).ajouterRessource();
+				
+				
+				
+				
+			}
 			
-				
+		
+			
+			
+			
 			
 						
 			if(clavier.exit){
@@ -190,5 +324,10 @@ public class FenetreInventaire extends JPanel implements ActionListener   {
 			repaint();
 		}	
 	}
+	
+	
+	
+	
+	
 		  
 }

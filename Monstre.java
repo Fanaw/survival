@@ -6,7 +6,7 @@ import javax.swing.*;
 public class Monstre extends Creature {
 	
 	
-	long deplacement,dernierDeplacement = 800,cooldown=100;
+	long deplacement,dernierDeplacement = 800,cooldown=300;
 	
 	
 	public Monstre(float x, float y, int largeur, int hauteur) {
@@ -33,6 +33,7 @@ public class Monstre extends Creature {
 		AnimationMort a = new AnimationMort((int)x,(int)y);
 		a.t1=System.currentTimeMillis();
 		Fenetre.gAnim.addAnim(a);
+		Fenetre.gItem.addItem(Liste.iViande.nouvelItem((int)x+largeur/3,(int) y+hauteur/3));
 		
 	}
 	
@@ -69,19 +70,19 @@ public class Monstre extends Creature {
 			 direction = random;
 			 if(random == 0){
 				 xMove =0;
-				 yMove +=vitesse;
+				 yMove +=vitesse/2;
 				
 			 }else if(random == 1){
 				 xMove=0;
-				 yMove-=vitesse;
+				 yMove-=vitesse/2;
 				 
 				 
 			 }else if(random == 2){
-				 xMove-=vitesse;
+				 xMove-=vitesse/2;
 				 yMove=0;
 				 
 			 }else{
-				 xMove+=vitesse;
+				 xMove+=vitesse/2;
 				 yMove=0;
 				 
 			 }

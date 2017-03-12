@@ -17,7 +17,7 @@ public class Jeu extends JFrame implements ActionListener{
 	Fenetre fenetre_JEU = new Fenetre(LARGEUR_FENETRE,HAUTEUR_FENETRE,clavier,this);
 	FenetreMenu fenetre_MENU = new FenetreMenu(LARGEUR_FENETRE,HAUTEUR_FENETRE,clavier,this);
 	FenetreInventaire fenetre_INVENTAIRE = new FenetreInventaire(LARGEUR_FENETRE,HAUTEUR_FENETRE,clavier,this);
-
+	static boolean showInv;
 	
 	public Jeu() {
 		
@@ -29,7 +29,7 @@ public class Jeu extends JFrame implements ActionListener{
 		this.setResizable(false);
 				
 		
-		Timer timer = new Timer(30,this);
+		Timer timer = new Timer(100,this);
 		timer.start();	
 				
 		addKeyListener(clavier);
@@ -41,17 +41,22 @@ public class Jeu extends JFrame implements ActionListener{
 	
 	
 	public void actionPerformed(ActionEvent e) {
-		
+	
 		if(fenetre_INVENTAIRE.show){
 			this.add(fenetre_INVENTAIRE);
+			showInv=true;
 		}if(fenetre_JEU.show){
 			this.add(fenetre_JEU);
+			showInv=false;
 		}if(fenetre_MENU.show){
 			this.add(fenetre_MENU);
+			showInv=false;
 		}
 		
 		if(fenetre_INVENTAIRE.show==false){
 			this.remove(fenetre_INVENTAIRE);
+			fenetre_INVENTAIRE.xCurseur=100;
+			fenetre_INVENTAIRE.yCurseur=300;
 		}if(fenetre_JEU.show==false){
 			this.remove(fenetre_JEU);
 		}if(fenetre_MENU.show==false){

@@ -5,12 +5,13 @@ import java.awt.image.BufferedImage;
 public class Item {
 	
 	protected float x,y;
-	protected int largeur = 100, hauteur = 100;
+	protected int largeur = 60, hauteur = 60;
 	protected BufferedImage image;
 	protected String nom;
 	protected int id;
 	protected boolean prendre=false;
-	
+	protected String iNom;
+	protected boolean ajout;
 	
 	protected Rectangle bords;
 	
@@ -26,9 +27,24 @@ public class Item {
 	}
 	
 	public void tick(){
-		if(Fenetre.j1.getCollisionBounds(0,0).intersects(bords)) // SI LE JOUEUR EST EN COLLISION AVEC L'ITEM, PRENDRE = true
+		if(Fenetre.j1.getCollisionBounds(0,0).intersects(bords)){ // SI LE JOUEUR EST EN COLLISION AVEC L'ITEM, PRENDRE = true
 			prendre = true;
-		
+			
+			for(int i =0; i<Fenetre.j1.ressources_joueur.size();i++){
+				
+				if(Fenetre.j1.ressources_joueur.get(i).nom == nom){
+					Fenetre.j1.ressources_joueur.get(i).ajouterRessource();
+					System.out.println(" Ajout du "+nom );
+					ajout = true;
+				}
+			}
+			if(!ajout){
+				Fenetre.j1.ressources_joueur.add(new Ressource(1,nom,false));
+				System.out.println(" Ajout de la ressource "+nom );
+			}
+			ajout = false;
+			
+		}
 	}
 	
 	public Item nouvelItem(int x, int y){ // ON CREE LE MEME ITEM MAIS A UNE COORDONNE PRECISE
