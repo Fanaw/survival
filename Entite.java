@@ -5,7 +5,7 @@ import javax.swing.*;
 
 public class Entite {
 	
-	public static final int DEFAULT_vie = 10;
+	public static final int DEFAULT_vie = 100;
 	
 	
 	

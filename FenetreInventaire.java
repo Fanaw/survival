@@ -33,6 +33,8 @@ public class FenetreInventaire extends JPanel implements ActionListener   {
 	
 	boolean afficher_liste_ressources = false;
 	boolean afficher_liste_objets = true;
+	
+	boolean arme_equipe,armure_equipe,casque_equipe,bouclier_equipe ;
 		 
 	public FenetreInventaire(int LARGEUR_FENETRE, int HAUTEUR_FENETRE,Clavier clavier, Jeu jeu){
 		
@@ -63,14 +65,17 @@ public class FenetreInventaire extends JPanel implements ActionListener   {
 		
 		Graphics buffer = monBuf.getGraphics();
 		
+		//afficher le screen en fond
 		buffer.drawImage(fond,0,0,this);
 		
+		//barre grise en haut
 		buffer.setColor(new Color(150,150,150,200));
 		buffer.fillRect(0,0,LARGEUR_FENETRE,HAUTEUR_FENETRE);
 		
 		Font police = new Font("Tahoma", Font.BOLD, 20);
 		buffer.setFont(police);
 		
+		//affichage du "defileur"
 		if(afficher_liste_ressources){
 			buffer.setColor(new Color(80,80,80,127));
 		}
@@ -101,6 +106,7 @@ public class FenetreInventaire extends JPanel implements ActionListener   {
 		police = new Font("Tahoma", Font.BOLD, 10);
 		buffer.setFont(police);
 	
+		//affichage de la grille de fond et des ressources/objet
 		for(int i=0 ; i<4 ; i++){
 			for(int j=0 ; j<5 ; j++){
 				buffer.setColor(new Color(100,100,100,100));
@@ -118,6 +124,7 @@ public class FenetreInventaire extends JPanel implements ActionListener   {
 			}
 		}
 		
+		//affichage du curseur
 		int largeur = 100 ;
 		int hauteur = 100 ;
 		
@@ -147,18 +154,44 @@ public class FenetreInventaire extends JPanel implements ActionListener   {
 		buffer.fillRect(0,0,LARGEUR_FENETRE,HAUTEUR_FENETRE/5);
 		buffer.fillRect(0,4*HAUTEUR_FENETRE/5,LARGEUR_FENETRE,HAUTEUR_FENETRE/5);
 		
+		//affichage du nom joueur
 		police = new Font("Tahoma", Font.ITALIC, 50);
 		buffer.setFont(police);
 		buffer.setColor(new Color(200,200,200,240));
 		buffer.drawString(jeu.fenetre_JEU.j1.nom,LARGEUR_FENETRE/2-100,150);
 		
-		buffer.setColor(new Color(218,29,29,240));
-		buffer.fillRoundRect(150,100,jeu.fenetre_JEU.j1.pv/6,15,20,20);
-				
-		g.drawImage(monBuf,0,0,this);
+		//rectangle equipement
+		Graphics2D g2d = (Graphics2D)buffer;         
+		GradientPaint gp = new GradientPaint(0, 0,  new Color(100,100,100,127), 1000, 0,new Color(30,30,30,127), true);                
+		g2d.setPaint(gp);
+		g2d.fillRoundRect(1100,300,720,220,20,20);
 		
+		buffer.setColor( new Color(100,100,100,127));
+		buffer.drawRoundRect(1105,305,710,210,20,20);
+		buffer.drawRoundRect(1104,304,712,212,20,20);
 		
+		buffer.setFont(new Font("Tahoma", Font.ITALIC, 30));
+		buffer.setColor(new Color(200,200,200,240));
+		buffer.drawString("Equipement :",1130,340);
 		
+		for(int i=0;i<4;i++){
+			buffer.setColor(new Color(200,200,200,100));
+			buffer.drawRoundRect(1130+i*120,400,100,100,10,10);
+			buffer.drawRoundRect(1131+i*120,401,98,98,10,10);
+			buffer.drawRoundRect(1132+i*120,402,96,96,10,10);
+		}
+		
+		//affichage du perso et rectangle d'info joueur
+		buffer.drawImage(ImageLoader.ImgLoader("persoInventaire.png"),740,300,this);
+		
+		g2d.setPaint(gp);
+		g2d.fillRoundRect(720,660,340,100,20,20);
+		
+		buffer.setFont(new Font("Tahoma", Font.ITALIC, 20));
+		buffer.setColor(new Color(200,200,200,240));
+		buffer.drawString("Degats : "+jeu.fenetre_JEU.j1.degat+"  Resistance : "+jeu.fenetre_JEU.j1.resistance,750,700);
+		
+		g.drawImage(monBuf,0,0,this);	
 	}
 	
 	public void actionPerformed(ActionEvent e) {
@@ -256,10 +289,7 @@ public class FenetreInventaire extends JPanel implements ActionListener   {
 				}
 				
 			}
-			
-			
-			
-			
+		
 			if(clavier.exit){
 				jeu.fenetre_JEU.show=true;
 				this.show=false;

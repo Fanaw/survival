@@ -34,7 +34,6 @@ public class Item {
 				
 				if(Fenetre.j1.ressources_joueur[i].nom == nom){
 					Fenetre.j1.ressources_joueur[i].ajouterRessource();
-					System.out.println(" Ajout du "+nom );
 					ajout = true;
 				}
 			}

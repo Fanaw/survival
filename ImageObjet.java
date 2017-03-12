@@ -42,7 +42,6 @@ public class ImageObjet {
 		}
 		
 		if(active){
-				
 			Graphics2D g2d = (Graphics2D)g;         
 			GradientPaint gp = new GradientPaint(0, 0,  new Color(100,100,100,127), 1000, 0,new Color(30,30,30,127), true);                
 			g2d.setPaint(gp);
@@ -54,23 +53,105 @@ public class ImageObjet {
 			
 			g.setFont(new Font("Tahoma", Font.ITALIC, 30));
 			g.setColor(new Color(200,200,200,240));
-			g.drawString(this.objet.description,1130,610);
-			g.drawString("bois : "+this.objet.bois,1130,650);
-			g.drawString("pierre : "+this.objet.pierre,1130,690);
-			g.drawString("metal : "+this.objet.metal,1130,730);
 			
-			if(fenetre_INVENTAIRE.jeu.clavier.enter && fenetre_INVENTAIRE.jeu.fenetre_JEU.j1.ressources_joueur[0].nombre>=objet.bois && fenetre_INVENTAIRE.jeu.fenetre_JEU.j1.ressources_joueur[1].nombre>=objet.pierre && fenetre_INVENTAIRE.jeu.fenetre_JEU.j1.ressources_joueur[2].nombre>=objet.metal){
+			if(!objet.exister){
+				g.drawString(this.objet.description,1130,610);
+				g.drawString("bois necessaire: "+this.objet.bois+"  bois en stock: "+this.fenetre_INVENTAIRE.jeu.fenetre_JEU.j1.ressources_joueur[0].nombre,1130,650);
+				g.drawString("pierre necessaire: "+this.objet.pierre+"  pierre en stock: "+this.fenetre_INVENTAIRE.jeu.fenetre_JEU.j1.ressources_joueur[1].nombre,1130,690);
+				g.drawString("metal necessaire: "+this.objet.metal+"  metal en stock: "+this.fenetre_INVENTAIRE.jeu.fenetre_JEU.j1.ressources_joueur[2].nombre,1130,730);
+			}else if(objet.exister){
+				g.drawString(this.objet.description,1130,610);
+				g.drawString("degat supplementaire : +"+objet.degat_supp,1130,650);
+				g.drawString("resistance supplementaire : +"+objet.resistance_supp,1130,690);
+			}
+			
+			
+			if(objet.exister==false && fenetre_INVENTAIRE.jeu.clavier.enter && fenetre_INVENTAIRE.jeu.fenetre_JEU.j1.ressources_joueur[0].nombre>=objet.bois && fenetre_INVENTAIRE.jeu.fenetre_JEU.j1.ressources_joueur[1].nombre>=objet.pierre && fenetre_INVENTAIRE.jeu.fenetre_JEU.j1.ressources_joueur[2].nombre>=objet.metal){
 			
 				objet.exister=true;
 				fenetre_INVENTAIRE.jeu.fenetre_JEU.j1.ressources_joueur[0].nombre-=objet.bois;
 				fenetre_INVENTAIRE.jeu.fenetre_JEU.j1.ressources_joueur[1].nombre-=objet.pierre;
 				fenetre_INVENTAIRE.jeu.fenetre_JEU.j1.ressources_joueur[2].nombre-=objet.metal;
 				
-			
 			}
-
+			
+			if(objet.exister){
+				if(objet.categorie=="arme"){
+					if(fenetre_INVENTAIRE.jeu.clavier.keyToutJusteAppuie(KeyEvent.VK_E)){
+						if(!objet.equipe && !fenetre_INVENTAIRE.arme_equipe){
+							objet.equipe=true;
+							fenetre_INVENTAIRE.arme_equipe=true;
+							fenetre_INVENTAIRE.jeu.fenetre_JEU.j1.degat+=objet.degat_supp;
+							fenetre_INVENTAIRE.jeu.fenetre_JEU.j1.resistance+=objet.resistance_supp;
+						}
+						else if(objet.equipe && fenetre_INVENTAIRE.arme_equipe){
+							objet.equipe=false;
+							fenetre_INVENTAIRE.arme_equipe=false;
+							fenetre_INVENTAIRE.jeu.fenetre_JEU.j1.degat-=objet.degat_supp;
+							fenetre_INVENTAIRE.jeu.fenetre_JEU.j1.resistance-=objet.resistance_supp;
+						}				
+					}
+				}else if(objet.categorie=="armure"){
+					if(fenetre_INVENTAIRE.jeu.clavier.keyToutJusteAppuie(KeyEvent.VK_E)){
+						if(!objet.equipe && !fenetre_INVENTAIRE.armure_equipe){
+							objet.equipe=true;
+							fenetre_INVENTAIRE.armure_equipe=true;
+							fenetre_INVENTAIRE.jeu.fenetre_JEU.j1.degat+=objet.degat_supp;
+							fenetre_INVENTAIRE.jeu.fenetre_JEU.j1.resistance+=objet.resistance_supp;
+						}
+						else if(objet.equipe && fenetre_INVENTAIRE.armure_equipe){
+							objet.equipe=false;
+							fenetre_INVENTAIRE.armure_equipe=false;
+							fenetre_INVENTAIRE.jeu.fenetre_JEU.j1.degat-=objet.degat_supp;
+							fenetre_INVENTAIRE.jeu.fenetre_JEU.j1.resistance-=objet.resistance_supp;
+						}				
+					}
+				}else if(objet.categorie=="casque"){
+					if(fenetre_INVENTAIRE.jeu.clavier.keyToutJusteAppuie(KeyEvent.VK_E)){
+						if(!objet.equipe && !fenetre_INVENTAIRE.casque_equipe){
+							objet.equipe=true;
+							fenetre_INVENTAIRE.casque_equipe=true;
+							fenetre_INVENTAIRE.jeu.fenetre_JEU.j1.degat+=objet.degat_supp;
+							fenetre_INVENTAIRE.jeu.fenetre_JEU.j1.resistance+=objet.resistance_supp;
+						}
+						else if(objet.equipe && fenetre_INVENTAIRE.casque_equipe){
+							objet.equipe=false;
+							fenetre_INVENTAIRE.casque_equipe=false;
+							fenetre_INVENTAIRE.jeu.fenetre_JEU.j1.degat-=objet.degat_supp;
+							fenetre_INVENTAIRE.jeu.fenetre_JEU.j1.resistance-=objet.resistance_supp;
+						}
+					}
+				}else if(objet.categorie=="bouclier"){
+					if(fenetre_INVENTAIRE.jeu.clavier.keyToutJusteAppuie(KeyEvent.VK_E)){
+						if(!objet.equipe && !fenetre_INVENTAIRE.bouclier_equipe){
+							objet.equipe=true;
+							fenetre_INVENTAIRE.bouclier_equipe=true;
+							fenetre_INVENTAIRE.jeu.fenetre_JEU.j1.degat+=objet.degat_supp;
+							fenetre_INVENTAIRE.jeu.fenetre_JEU.j1.resistance+=objet.resistance_supp;
+						}
+						else if(objet.equipe && fenetre_INVENTAIRE.bouclier_equipe){
+							objet.equipe=false;
+							fenetre_INVENTAIRE.bouclier_equipe=false;
+							fenetre_INVENTAIRE.jeu.fenetre_JEU.j1.degat-=objet.degat_supp;
+							fenetre_INVENTAIRE.jeu.fenetre_JEU.j1.resistance-=objet.resistance_supp;
+						}
+					}
+				}
+			}
 			
 		}		
+		
+		if(objet.equipe){
+			if(objet.categorie=="arme"){
+				g.drawImage(image,1130,400,jp);
+			}else if(objet.categorie=="armure"){
+				g.drawImage(image,1130+120,400,jp);
+			}else if(objet.categorie=="casque"){
+				g.drawImage(image,1130+2*120,400,jp);
+			}else if(objet.categorie=="bouclier"){
+				g.drawImage(image,1130+3*120,400,jp);
+			}
+		}
 		
 	}
 

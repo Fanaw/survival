@@ -33,12 +33,15 @@ public class Jeu extends JFrame implements ActionListener{
 		timer.start();	
 				
 		addKeyListener(clavier);
-		
-		//this.add(fenetre_INVENTAIRE);
-		
+				
 		setVisible(true);
 	}
 	
+	public void paint(Graphics g) {
+		
+		
+		
+	}
 	
 	public void actionPerformed(ActionEvent e) {
 	
@@ -63,6 +66,7 @@ public class Jeu extends JFrame implements ActionListener{
 			this.remove(fenetre_MENU);
 		}
 		
+		repaint();
 		clavier.tick();
 	}
 

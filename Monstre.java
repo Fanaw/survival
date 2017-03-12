@@ -7,14 +7,10 @@ public class Monstre extends Creature {
 	
 	
 	long deplacement,dernierDeplacement = 800,cooldown=300;
-	
+	int degat = 10;
 	
 	public Monstre(float x, float y, int largeur, int hauteur) {
-		super(x,y,largeur,hauteur);
-		System.out.println("Monstre Cree");
-		
-		
-		
+		super(x,y,largeur,hauteur);	
 	}
 	
 	public void tick(){
@@ -43,9 +39,8 @@ public class Monstre extends Creature {
 		Rectangle ra = new Rectangle((int)x -largeur/2 ,(int)y-hauteur/2,largeur*2,hauteur*2);
 		//creation du rectangle du joueur en fonction de sa position
 		Rectangle rj = new Rectangle ((int)(Fenetre.j1.x), (int)(Fenetre.j1.y ),Fenetre.j1.largeur , Fenetre.j1.hauteur);
-		System.out.println("TOUCHÉ");
 		if(ra.intersects(rj)){
-			Fenetre.j1.subisAttaque(1);
+			Fenetre.j1.subisAttaque(degat*(1-(Fenetre.j1.resistance/1000)));
 			
 		}
 		
@@ -97,7 +92,6 @@ public class Monstre extends Creature {
 	}
 	
 	public void dessine(Graphics g, JPanel jf){
-		System.out.println("Dessin");
 		g.drawImage(Liste.monstre1, (int) (x - Fenetre.camera.getxOffset()) , (int) (y - Fenetre.camera.getyOffset()), largeur, hauteur, jf);
 		g.setColor(Color.red);
 		g.fillRect((int) (x-Fenetre.camera.getxOffset()), (int) (y+largeur - Fenetre.camera.getyOffset()), vie*largeur/10, 20);

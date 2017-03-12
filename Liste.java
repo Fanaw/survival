@@ -200,9 +200,9 @@ public class Liste {
 	public static Ressource ressource_metal = new Ressource("metal",10,"metal.png","description metal");
 	public static Ressource ressource_pierre = new Ressource("pierre",10,"pierre.png","description pierre");
 
-	public static Objet objet_hache = new Objet(0,"hache.png","description hache",3,3,0);
-	public static Objet objet_bouclier = new Objet(0,"bouclier.png","description bouclier",3,3,2);
-	public static Objet objet_epee = new Objet(0,"casque.png","description epee",0,3,3);
+	public static Objet objet_hache = new Objet(100,0,"arme",0,"hache.png","description hache",3,3,0);
+	public static Objet objet_bouclier = new Objet(0,100,"bouclier",0,"bouclier.png","description bouclier",3,3,2);
+	public static Objet objet_epee = new Objet(0,50,"casque",0,"casque.png","description epee",0,3,3);
 
 	
 	

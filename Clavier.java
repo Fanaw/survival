@@ -5,7 +5,7 @@ public class Clavier implements KeyListener {
 
 	
 	boolean[] keys, toutJusteAppuie, nePeutPasAppuie;
-	boolean up,down,left,right,shift,degatUp,degatDown,degatLeft,degatRight,enter,inventaire,exit;
+	boolean up,down,left,right,shift,degatUp,degatDown,degatLeft,degatRight,enter,inventaire,exit,equipe;
 	public Clavier(){
 		keys = new boolean[256];
 		toutJusteAppuie = new boolean[keys.length];
@@ -47,6 +47,7 @@ public class Clavier implements KeyListener {
 		enter=keys[KeyEvent.VK_ENTER];
 		inventaire=keys[KeyEvent.VK_P];
 		exit=keys[KeyEvent.VK_M];
+		equipe=keys[KeyEvent.VK_E];
 		
 		
 		

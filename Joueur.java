@@ -9,12 +9,14 @@ public class Joueur extends Creature {
 	Ressource[] ressources_joueur = new Ressource[3];
 	Objet[] objets_joueur = new Objet[3];
 	
-	String nom = "Kardha-Chiant" ;
+	String nom = "Kardha-Chiant" ; 
 	
 	 
 	int nourriture = 1000 ;
 	int eau = 1000;
 	int pv=1000;
+	int degat=100;
+	int resistance=100;
 	
 	static int largeur = 60;
 	static int hauteur = 60;
@@ -80,7 +82,7 @@ public class Joueur extends Creature {
 			if(e.equals(this))
 				continue; // Passe à l'entité suivante
 			if(e.getCollisionBounds(0, 0).intersects(ar)){
-				e.subisAttaque(1);
+				e.subisAttaque(degat);
 				return;
 			}
 		}
