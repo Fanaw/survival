@@ -12,14 +12,16 @@ public class ImageObjet {
 	BufferedImage image ; 
 	int largeur = 100;
 	int hauteur = 100;
-	Ressource ressource ;
+	Objet objet ;
 	boolean active  ;
+	FenetreInventaire fenetre_INVENTAIRE ;
 
-	public ImageObjet (Ressource ressource, boolean active) {
+	public ImageObjet (Objet objet, boolean active,FenetreInventaire fi) {
 		
-		image = ImageLoader.scale(ressource.image,largeur,hauteur);
-		this.ressource=ressource;
+		image = ImageLoader.scale(objet.image,largeur,hauteur);
+		this.objet=objet;
 		this.active=active;
+		fenetre_INVENTAIRE=fi;
 	
 	}
 	
@@ -34,7 +36,7 @@ public class ImageObjet {
 		
 		g.drawImage(image,x,y,jp);
 		
-		if(ressource.nombre==0){
+		if(objet.exister==false){
 			g.setColor(new Color(30,30,30,200));
 			g.fillRoundRect(x,y,largeur,hauteur,10,10);
 		}
@@ -50,7 +52,24 @@ public class ImageObjet {
 			g.drawRoundRect(1105,545,710,210,20,20);
 			g.drawRoundRect(1104,544,712,212,20,20);
 			
+			g.setFont(new Font("Tahoma", Font.ITALIC, 30));
+			g.setColor(new Color(200,200,200,240));
+			g.drawString(this.objet.description,1130,610);
+			g.drawString("bois : "+this.objet.bois,1130,650);
+			g.drawString("pierre : "+this.objet.pierre,1130,690);
+			g.drawString("metal : "+this.objet.metal,1130,730);
+			
 		}		
+		
+		if(fenetre_INVENTAIRE.jeu.clavier.enter && fenetre_INVENTAIRE.jeu.fenetre_JEU.j1.ressources_joueur[0].nombre>=objet.bois && fenetre_INVENTAIRE.jeu.fenetre_JEU.j1.ressources_joueur[1].nombre>=objet.pierre && fenetre_INVENTAIRE.jeu.fenetre_JEU.j1.ressources_joueur[2].nombre>=objet.metal){
+		
+			objet.exister=true;
+			fenetre_INVENTAIRE.jeu.fenetre_JEU.j1.ressources_joueur[0].nombre-=objet.bois;
+			fenetre_INVENTAIRE.jeu.fenetre_JEU.j1.ressources_joueur[1].nombre-=objet.pierre;
+			fenetre_INVENTAIRE.jeu.fenetre_JEU.j1.ressources_joueur[2].nombre-=objet.metal;
+			
+		
+		}
 	}
 
 }

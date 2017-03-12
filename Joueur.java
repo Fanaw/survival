@@ -6,8 +6,8 @@ import javax.swing.*;
 
 public class Joueur extends Creature {
 	
-	ArrayList<Ressource> ressources_joueur = new ArrayList<Ressource>();
-	ArrayList<Ressource> objets_joueur = new ArrayList<Ressource>();
+	Ressource[] ressources_joueur = new Ressource[3];
+	Objet[] objets_joueur = new Objet[3];
 	
 	String nom = "AssouB" ;
 	
@@ -26,26 +26,14 @@ public class Joueur extends Creature {
 		bords.height = 32;
 		
 		//liste de ressources
-		ressources_joueur.add(Liste.ressource_bois);
-		ressources_joueur.add(Liste.ressource_metal);
-		ressources_joueur.add(Liste.ressource_peau);
-		ressources_joueur.add(Liste.ressource_pierre);
-		ressources_joueur.add(Liste.ressource_viande);
-		ressources_joueur.add(Liste.ressource_peau);
-		ressources_joueur.add(Liste.ressource_pierre);
-		ressources_joueur.add(Liste.ressource_viande);
-		ressources_joueur.add(Liste.ressource_bois);
-		ressources_joueur.add(Liste.ressource_metal);
-		ressources_joueur.add(Liste.ressource_peau);
-		ressources_joueur.add(Liste.ressource_pierre);
-		ressources_joueur.add(Liste.ressource_viande);
+		ressources_joueur[0]=Liste.ressource_bois;
+		ressources_joueur[1]=Liste.ressource_pierre;
+		ressources_joueur[2]=Liste.ressource_metal;
 		
 		//liste d'objets
-		objets_joueur.add(Liste.objet_botte);
-		objets_joueur.add(Liste.objet_bouclier);
-		objets_joueur.add(Liste.objet_cape);
-		objets_joueur.add(Liste.objet_casque);
-		objets_joueur.add(Liste.objet_hache);
+		objets_joueur[0]=Liste.objet_hache;
+		objets_joueur[1]=Liste.objet_epee;
+		objets_joueur[2]=Liste.objet_bouclier;
 		
 	
 	}
@@ -128,10 +116,6 @@ public class Joueur extends Creature {
 	public void dessine(Graphics g, JPanel jf) {
 		
 		g.drawImage(Liste.joueur, (int) (x - Fenetre.camera.getxOffset()) , (int) (y - Fenetre.camera.getyOffset()), largeur, hauteur, jf);
-		
-		//Rectangle de collision
-		//g.setColor(Color.red);
-		//g.fillRect( (int) (x +bords.x - Fenetre.camera.getxOffset()) , (int) (y +bords.y - Fenetre.camera.getyOffset()), bords.width, bords.height  );
 	
 	}
 	

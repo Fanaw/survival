@@ -30,11 +30,9 @@ public class FenetreInventaire extends JPanel implements ActionListener   {
 	
 	ArrayList<ImageInventaire> liste_ressources = new ArrayList<ImageInventaire>() ;
 	ArrayList<ImageObjet> liste_objets = new ArrayList<ImageObjet>() ;
-	//ArrayList<ImageInventaire> liste_nourriture = new ArrayList<ImageInventaire>() ;
 	
 	boolean afficher_liste_ressources = false;
 	boolean afficher_liste_objets = true;
-	//boolean afficher_liste_nourriture = false;
 		 
 	public FenetreInventaire(int LARGEUR_FENETRE, int HAUTEUR_FENETRE,Clavier clavier, Jeu jeu){
 		
@@ -46,11 +44,11 @@ public class FenetreInventaire extends JPanel implements ActionListener   {
 		this.monBuf = new BufferedImage(LARGEUR_FENETRE,HAUTEUR_FENETRE,BufferedImage.TYPE_INT_RGB);
 		
 		//Init ArrayList
-		for(int i=0;i<jeu.fenetre_JEU.j1.ressources_joueur.size();i++){
-			liste_ressources.add(new ImageInventaire(jeu.fenetre_JEU.j1.ressources_joueur.get(i),false));
+		for(int i=0;i<3;i++){
+			liste_ressources.add(new ImageInventaire(jeu.fenetre_JEU.j1.ressources_joueur[i],false));
 		}
-		for(int i=0;i<jeu.fenetre_JEU.j1.objets_joueur.size();i++){
-			liste_objets.add(new ImageObjet(jeu.fenetre_JEU.j1.objets_joueur.get(i),false));
+		for(int i=0;i<3;i++){
+			liste_objets.add(new ImageObjet(jeu.fenetre_JEU.j1.objets_joueur[i],false,this));
 		}
 		
 		//Chargement des images
