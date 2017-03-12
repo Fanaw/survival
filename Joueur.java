@@ -6,8 +6,8 @@ import javax.swing.*;
 
 public class Joueur extends Creature {
 	
-	ArrayList<Ressource> ressources_joueur = new ArrayList<Ressource>();
-	ArrayList<Ressource> objets_joueur = new ArrayList<Ressource>();
+	Ressource[] ressources_joueur = new Ressource[3];
+	Objet[] objets_joueur = new Objet[3];
 	
 	String nom = "Kardha-Chiant" ;
 	
@@ -23,6 +23,7 @@ public class Joueur extends Creature {
 		bords.x = 5;
 		bords.y = 30;
 		bords.width =50;
+<<<<<<< HEAD
 		bords.height = 30;
 		vie=100;
 	
@@ -30,6 +31,20 @@ public class Joueur extends Creature {
 		objets_joueur.add(new Ressource(0,"bouclier",true));
 		objets_joueur.add(new Ressource(0,"cape",true));
 		objets_joueur.add(new Ressource(0,"casque",true));
+=======
+		bords.height = 32;
+		
+		//liste de ressources
+		ressources_joueur[0]=Liste.ressource_bois;
+		ressources_joueur[1]=Liste.ressource_pierre;
+		ressources_joueur[2]=Liste.ressource_metal;
+		
+		//liste d'objets
+		objets_joueur[0]=Liste.objet_hache;
+		objets_joueur[1]=Liste.objet_epee;
+		objets_joueur[2]=Liste.objet_bouclier;
+		
+>>>>>>> origin/master
 	
 	}
 
@@ -112,10 +127,6 @@ public class Joueur extends Creature {
 	public void dessine(Graphics g, JPanel jf) {
 		
 		g.drawImage(Liste.joueur, (int) (x - Fenetre.camera.getxOffset()) , (int) (y - Fenetre.camera.getyOffset()), largeur, hauteur, jf);
-		
-		//Rectangle de collision
-		//g.setColor(Color.red);
-		//g.fillRect( (int) (x +bords.x - Fenetre.camera.getxOffset()) , (int) (y +bords.y - Fenetre.camera.getyOffset()), bords.width, bords.height  );
 	
 	}
 	

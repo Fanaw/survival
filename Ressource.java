@@ -6,6 +6,7 @@ import java.awt.geom.*;
 import java.awt.image.*;
 import java.awt.Graphics;
 import javax.imageio.*;
+import java.util.*;
 
 public class Ressource {
 	
@@ -15,6 +16,7 @@ public class Ressource {
 	boolean equipable;
 	String nom;
 	BufferedImage image ;
+<<<<<<< HEAD
 	boolean active  ;
 	
 
@@ -25,6 +27,14 @@ public class Ressource {
 		this.equipable = equipable;
 		
 		
+=======
+	String description ;
+	
+	public Ressource(int nombre,String nomFichierImage,String description) {
+		this.image = ImageLoader.ImgLoader(nomFichierImage);
+		this.nombre=nombre;
+		this.description=description;
+>>>>>>> origin/master
 	}
 	
 	

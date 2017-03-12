@@ -196,9 +196,20 @@ public class Liste {
 	
 
 	
+<<<<<<< HEAD
 	
 	
 	
+=======
+	//Ressources
+	public static Ressource ressource_bois = new Ressource(10,"bois.png","description bois");
+	public static Ressource ressource_metal = new Ressource(10,"metal.png","description metal");
+	public static Ressource ressource_pierre = new Ressource(10,"pierre.png","description pierre");
+
+	public static Objet objet_hache = new Objet(0,"hache.png","description hache",3,3,0);
+	public static Objet objet_bouclier = new Objet(0,"bouclier.png","description bouclier",3,3,2);
+	public static Objet objet_epee = new Objet(0,"casque.png","description epee",0,3,3);
+>>>>>>> origin/master
 	
 	
 	//IMAGES ANIMÉES ;

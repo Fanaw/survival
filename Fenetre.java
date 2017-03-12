@@ -93,7 +93,6 @@ public class Fenetre extends JPanel implements ActionListener {
 			
 		if(show){	
 			if(clavier.inventaire){
-				System.out.println("je dois afficher l'inventaire");
 				jeu.fenetre_INVENTAIRE.show=true;
 				this.show=false;
 				
